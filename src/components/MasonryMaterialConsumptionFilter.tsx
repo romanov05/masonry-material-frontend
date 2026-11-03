@@ -1,4 +1,4 @@
-import type { FC, FormEvent } from 'react';
+import type { FC } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 
 interface MasonryMaterialConsumptionFilterProps {
@@ -16,26 +16,25 @@ export const MasonryMaterialConsumptionFilter: FC<MasonryMaterialConsumptionFilt
   loading,
   onChange,
   onSearch,
-}) => {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // без перезагрузки страницы
-    onSearch();
-  };
-
-  return (
-    <Form className="masonry-material-tiles__search" onSubmit={handleSubmit}>
-      <Form.Range
-        className="masonry-material-tiles__search-input"
-        min={0}
-        max={max}
-        step={1}
-        value={value}
-        onChange={(event) => onChange(Number(event.target.value))}
-      />
-      <output className="masonry-material-tiles__search-value">{value}</output>
-      <Button type="submit" className="masonry-material-btn" disabled={loading}>
-        {loading ? <Spinner animation="border" size="sm" /> : 'Найти'}
-      </Button>
-    </Form>
-  );
-};
+}) => (
+  <Form
+    className="masonry-material-tiles__search"
+    onSubmit={(event) => {
+      event.preventDefault(); // без перезагрузки страницы
+      onSearch();
+    }}
+  >
+    <Form.Range
+      className="masonry-material-tiles__search-input"
+      min={0}
+      max={max}
+      step={1}
+      value={value}
+      onChange={(event) => onChange(Number(event.target.value))}
+    />
+    <output className="masonry-material-tiles__search-value">{value}</output>
+    <Button type="submit" className="masonry-material-btn" disabled={loading}>
+      {loading ? <Spinner animation="border" size="sm" /> : 'Найти'}
+    </Button>
+  </Form>
+);
