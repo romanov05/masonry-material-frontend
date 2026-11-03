@@ -1,0 +1,363 @@
+:root {
+  --masonry-material-color-primary: rgb(33, 123, 0);
+  --masonry-material-color-primary-dark: #1a6200;
+  --masonry-material-color-surface: #ffffff;
+  --masonry-material-color-bg: #f4f4f4;
+  --masonry-material-color-text: rgb(51, 51, 51);
+  --masonry-material-color-text-muted: rgb(85, 85, 85);
+  --masonry-material-color-border: rgb(229, 229, 229);
+
+  --masonry-material-screen-width: 420px;
+  --masonry-material-tabbar-height: 76px;
+  --masonry-material-radius-card: 16px;
+  --masonry-material-radius-pill: 10px;
+
+  --masonry-material-font: 'Manrope', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--masonry-material-font);
+  color: var(--masonry-material-color-text);
+  background: var(--masonry-material-color-bg);
+}
+
+/* Экран и нижняя панель */
+
+.masonry-material-screen {
+  position: relative;
+  max-width: var(--masonry-material-screen-width);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--masonry-material-color-surface);
+}
+
+.masonry-material-content {
+  padding-bottom: var(--masonry-material-tabbar-height);
+}
+
+.masonry-material-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--masonry-material-screen-width);
+  height: var(--masonry-material-tabbar-height);
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--masonry-material-color-surface);
+  border-top: 1px solid var(--masonry-material-color-border);
+  z-index: 10;
+}
+
+.masonry-material-tabbar .masonry-material-tabbar__item {
+  padding: 8px 6px;
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--masonry-material-color-text-muted);
+  transition: color 0.15s ease;
+}
+
+.masonry-material-tabbar .masonry-material-tabbar__item:hover {
+  color: var(--masonry-material-color-primary-dark);
+}
+
+.masonry-material-tabbar .masonry-material-tabbar__item.active {
+  color: var(--masonry-material-color-primary);
+}
+
+.masonry-material-tabbar .masonry-material-tabbar__item.disabled,
+.masonry-material-tabbar .masonry-material-tabbar__item:disabled {
+  color: #b8b8b8;
+  cursor: not-allowed;
+}
+
+/* Кнопка «Найти» */
+
+.btn.masonry-material-btn {
+  min-width: 92px;
+  border: none;
+  border-radius: var(--masonry-material-radius-pill);
+  padding: 12px 22px;
+  font-weight: 700;
+  font-size: 14px;
+  background: var(--masonry-material-color-primary);
+  color: #fff;
+}
+
+.btn.masonry-material-btn:hover,
+.btn.masonry-material-btn:focus,
+.btn.masonry-material-btn:active,
+.btn.masonry-material-btn:disabled {
+  background: var(--masonry-material-color-primary-dark);
+  color: #fff;
+}
+
+.masonry-material-loader {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+  color: var(--masonry-material-color-primary);
+}
+
+/* Страница «Плитка» */
+
+.masonry-material-tiles__title {
+  padding: 24px 20px 12px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--masonry-material-color-text);
+}
+
+.masonry-material-tiles__search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px 20px;
+}
+
+.masonry-material-tiles__search-input {
+  flex: 1;
+  min-width: 120px;
+  accent-color: var(--masonry-material-color-primary);
+}
+
+.masonry-material-tiles__search-input::-webkit-slider-thumb {
+  background: var(--masonry-material-color-primary);
+}
+
+.masonry-material-tiles__search-input::-moz-range-thumb {
+  background: var(--masonry-material-color-primary);
+}
+
+.masonry-material-tiles__search-input:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(33, 123, 0, 0.2);
+}
+
+.masonry-material-tiles__search-value {
+  min-width: 34px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--masonry-material-color-primary);
+  text-align: right;
+}
+
+.masonry-material-tiles__grid {
+  margin: 0;
+  padding: 0 8px 20px;
+}
+
+.masonry-material-tiles__empty {
+  padding: 0 20px;
+  color: var(--masonry-material-color-text-muted);
+}
+
+.masonry-material-card__link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.masonry-material-card {
+  border: 1px solid var(--masonry-material-color-border);
+  border-radius: var(--masonry-material-radius-card);
+  padding: 14px;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.masonry-material-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-color: var(--masonry-material-color-primary);
+}
+
+.masonry-material-card .masonry-material-card__image {
+  width: 100%;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.masonry-material-card__body {
+  padding: 0;
+}
+
+.masonry-material-card__name {
+  min-height: 36px;
+  color: var(--masonry-material-color-text);
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.masonry-material-card__consumption,
+.masonry-material-card__likes {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--masonry-material-color-text-muted);
+}
+
+.masonry-material-card__likes {
+  margin-bottom: 0;
+}
+
+/* Страница «Лента» */
+
+.masonry-material-feed {
+  position: relative;
+  height: calc(100vh - var(--masonry-material-tabbar-height));
+  overflow: hidden;
+  background: #000;
+}
+
+.masonry-material-feed--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.masonry-material-feed__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.masonry-material-feed__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 24px 16px;
+}
+
+.masonry-material-feed__side {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.masonry-material-feed__fields {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 170px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 600;
+  text-align: right;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+}
+
+.masonry-material-feed__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.masonry-material-icon-btn,
+.btn.masonry-material-icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #fff;
+  text-decoration: none;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.55));
+  transition: transform 0.15s ease;
+}
+
+.btn.masonry-material-icon-btn:hover,
+.btn.masonry-material-icon-btn:focus,
+.btn.masonry-material-icon-btn:active,
+.btn.masonry-material-icon-btn:disabled {
+  color: #fff;
+  background: none;
+  border: none;
+}
+
+.btn.masonry-material-icon-btn:hover {
+  transform: scale(1.1);
+}
+
+.masonry-material-icon-btn svg {
+  width: 30px;
+  height: 30px;
+}
+
+.masonry-material-icon-btn--next svg {
+  width: 26px;
+  height: 26px;
+}
+
+.masonry-material-like-count {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.masonry-material-feed__text {
+  max-height: 38vh;
+  overflow-y: auto;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.masonry-material-feed__title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.masonry-material-feed__description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 2 строки до «больше» */
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.masonry-material-feed__description--expanded {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+}
+
+.masonry-material-desc-toggle {
+  margin-top: 6px;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: underline;
+  text-shadow: inherit;
+}
