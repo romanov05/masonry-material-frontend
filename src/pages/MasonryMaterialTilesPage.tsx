@@ -1,27 +1,28 @@
-import { useEffect, useState, type FC } from 'react';
+import { useEffect, type FC } from 'react';
 import { Col, Row, Spinner } from 'react-bootstrap';
 import { MasonryMaterialCard } from '../components/MasonryMaterialCard';
 import { MasonryMaterialConsumptionFilter } from '../components/MasonryMaterialConsumptionFilter';
-import { getMasonryMaterials } from '../modules/masonry-material-api';
-import type { MasonryMaterial } from '../modules/masonry-material-types';
 import { MASONRY_MATERIAL_MAX_CONSUMPTION } from '../modules/masonry-material-defaults';
+import { useMasonryMaterialDispatch, useMasonryMaterialSelector } from '../store';
+import {
+  deleteMasonryMaterial,
+  getMasonryMaterialList,
+  setMasonryMaterialMaxConsumption,
+} from '../slices/masonryMaterialSlice';
 
 export const MasonryMaterialTilesPage: FC = () => {
-  const [maxConsumption, setMaxConsumption] = useState(MASONRY_MATERIAL_MAX_CONSUMPTION);
-  const [materials, setMaterials] = useState<MasonryMaterial[]>([]);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useMasonryMaterialDispatch();
+  const { maxConsumption, materials, loading } = useMasonryMaterialSelector(
+    (state) => state.masonryMaterial,
+  );
+  const isAuthenticated = useMasonryMaterialSelector(
+    (state) => state.masonryMaterialUser.isAuthenticated,
+  );
 
-  const loadMaterials = (limit: number) => {
-    setLoading(true);
-    getMasonryMaterials(limit)
-      .then(setMaterials)
-      .finally(() => setLoading(false));
-  };
-
-  // загрузка всех услуг при открытии страницы
+  // загрузка услуг с текущим фильтром при открытии страницы
   useEffect(() => {
-    loadMaterials(MASONRY_MATERIAL_MAX_CONSUMPTION);
-  }, []);
+    dispatch(getMasonryMaterialList());
+  }, [dispatch]);
 
   return (
     <div className="masonry-material-tiles">
@@ -31,8 +32,8 @@ export const MasonryMaterialTilesPage: FC = () => {
         value={maxConsumption}
         max={MASONRY_MATERIAL_MAX_CONSUMPTION}
         loading={loading}
-        onChange={setMaxConsumption}
-        onSearch={() => loadMaterials(maxConsumption)}
+        onChange={(value) => dispatch(setMasonryMaterialMaxConsumption(value))}
+        onSearch={() => dispatch(getMasonryMaterialList())}
       />
 
       {loading && materials.length === 0 ? (
@@ -45,7 +46,12 @@ export const MasonryMaterialTilesPage: FC = () => {
         <Row xs={2} className="g-3 masonry-material-tiles__grid">
           {materials.map((material) => (
             <Col key={material.id}>
-              <MasonryMaterialCard material={material} />
+              <MasonryMaterialCard
+                material={material}
+                canDelete={isAuthenticated && material.isMine === 1}
+                loading={loading}
+                onDelete={(id) => dispatch(deleteMasonryMaterial(id))}
+              />
             </Col>
           ))}
         </Row>

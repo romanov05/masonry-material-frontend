@@ -1,17 +1,13 @@
 import type { MasonryMaterial } from './masonry-material-types';
 import { MASONRY_MATERIAL_MOCK } from './masonry-material-mock';
 
-const MASONRY_MATERIAL_MOCK_DELAY_MS = 300; // имитация задержки запроса
-
-const waitMasonryMaterialMock = () =>
-  new Promise<void>((resolve) => setTimeout(resolve, MASONRY_MATERIAL_MOCK_DELAY_MS));
+// mock-данные подставляются для гостя, когда веб-сервис недоступен
 
 const getSortedMasonryMaterialMock = () =>
   [...MASONRY_MATERIAL_MOCK].sort((first, second) => first.id - second.id);
 
 // список услуг с фильтром: расход не больше maxConsumption
-export async function getMasonryMaterials(maxConsumption?: number): Promise<MasonryMaterial[]> {
-  await waitMasonryMaterialMock();
+export function getMasonryMaterialMockList(maxConsumption?: number): MasonryMaterial[] {
   return getSortedMasonryMaterialMock().filter(
     (material) =>
       maxConsumption === undefined ||
@@ -20,11 +16,7 @@ export async function getMasonryMaterials(maxConsumption?: number): Promise<Maso
 }
 
 // лента: next без id — первая услуга, с id — эта услуга, с id и next — следующая по кругу
-export async function getMasonryMaterialFeedItem(
-  id?: number,
-  next = false,
-): Promise<MasonryMaterial | null> {
-  await waitMasonryMaterialMock();
+export function getMasonryMaterialMockFeedItem(id?: number, next = false): MasonryMaterial | null {
   const materials = getSortedMasonryMaterialMock();
   if (materials.length === 0) {
     return null;

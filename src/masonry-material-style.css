@@ -160,12 +160,13 @@ body {
 
 .masonry-material-card__link {
   display: block;
-  height: 100%;
+  flex: 1;
   color: inherit;
   text-decoration: none;
 }
 
 .masonry-material-card {
+  gap: 8px; /* между кликабельной частью карточки и кнопкой «Удалить» */
   border: 1px solid var(--masonry-material-color-border);
   border-radius: var(--masonry-material-radius-card);
   padding: 14px;
@@ -211,6 +212,11 @@ body {
 
 .masonry-material-card__likes {
   margin-bottom: 0;
+}
+
+.btn.masonry-material-card__delete {
+  display: block;
+  width: 100%;
 }
 
 /* Страница «Лента» */
@@ -305,6 +311,13 @@ body {
   transform: scale(1.1);
 }
 
+.btn.masonry-material-icon-btn--liked,
+.btn.masonry-material-icon-btn--liked:hover,
+.btn.masonry-material-icon-btn--liked:focus,
+.btn.masonry-material-icon-btn--liked:disabled {
+  color: #ff3b5c;
+}
+
 .masonry-material-icon-btn svg {
   width: 30px;
   height: 30px;
@@ -360,4 +373,46 @@ body {
   color: #fff;
   text-decoration: underline;
   text-shadow: inherit;
+}
+
+/* Страницы «Добавление» и «Вход» */
+
+.masonry-material-form {
+  padding: 24px 20px;
+}
+
+.masonry-material-form__title {
+  margin: 0 0 20px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.masonry-material-form .form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--masonry-material-color-text-muted);
+}
+
+.masonry-material-form .form-control {
+  border-radius: var(--masonry-material-radius-pill);
+}
+
+.masonry-material-form .form-control[readonly] {
+  background: var(--masonry-material-color-bg);
+}
+
+.masonry-material-form .form-control:focus {
+  border-color: var(--masonry-material-color-primary);
+  box-shadow: 0 0 0 4px rgba(33, 123, 0, 0.2);
+}
+
+.masonry-material-form__preview {
+  display: block;
+  width: 100%;
+  height: 160px;
+  margin-bottom: 8px;
+  border: 1px solid var(--masonry-material-color-border);
+  border-radius: var(--masonry-material-radius-card);
+  object-fit: contain;
+  background: var(--masonry-material-color-bg);
 }

@@ -8,7 +8,7 @@ export interface MasonryMaterial {
   consumptionPerM3: number | null; // расход, шт./м³
   createdAt: string;
   publishedAt: string | null;
-  isMine: 0 | 1;
+  isMine: number; // 1 — услуга текущего пользователя
   likesCount: number;
-  isLiked: 0 | 1;
+  isLiked: number; // 1 — текущий пользователь поставил лайк
 }
